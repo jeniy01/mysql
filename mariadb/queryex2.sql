@@ -21,9 +21,11 @@ select * from lecturer_tbl;
 desc lecturer_tbl;
 
 -- 전공(major)별 교수의 인원수를 구하여 뷰(major_view)를 생성하고 검색하시오
-create view marjor_view as (select major, count(major) as cnt from lecturer_tbl group by major);
+create view major_view as (select major, count(major) as cnt from lecturer_tbl group by major);
+select * from major_view;
 -- 연구분야(field)가 알고리즘이거나 운영체제인 교수의 번호, 강사명, 전공을 검색하되, 번호별로 내림차순 정렬하여 뷰(order_view)를 생성하고 검색하시오
 create view order_view as (select idx, name, major from lecturer_tbl where field='알고리즘' or field like '%운영체제%' order by idx desc);
+select * from order_view;
 -- 과목명, 강사명, 전공, 학점, 시작, 종료를 검색하되, course_tbl의 lecturer(강사)와 lecturer_tbl의 idx(번호)를 참조하여 검색하시오
 select course_tbl.name, lecturer_tbl.name, lecturer_tbl.major, course_tbl.credit, course_tbl.start_hour, course_tbl.end_end from course_tbl 
 inner join lecturer_tbl on course_tbl.lecturer=lecturer_tbl.idx;
@@ -53,14 +55,19 @@ select course_tbl.name, course_tbl.credit, lecturer_tbl.name,
  lecturer_tbl.major, lecturer_tbl.field
  from course_tbl inner join lecturer_tbl
  on course_tbl.lecturer=lecturer_tbl.idx where course_tbl.week=1;
+create view monday_course_view as (select course_tbl.name, course_tbl.credit, lecturer_tbl.name, lecturer_tbl.major, lecturer_tbl.field from course_tbl inner join lecturer_tbl on course_tbl.lecturer=lecturer_tbl.idx where course_tbl.week=1);
+select * from monday_course_view;
 -- 학점이 3학점인 과목의 과목id, 과목명, 강사명, 요일, 세부전공 등을 검색하여 구하는 뷰(credit3_view)를 생성하고 검색하시오
 select course_tbl.id, course_tbl.name, lecturer_tbl.name, course_tbl.week, 
 lecturer_tbl.field from lecturer_tbl inner join course_tbl
  on lecturer_tbl.idx=course_tbl.lecturer where course_tbl.credit = 3;
+ 
 -- 일주일에 4시간 이상 강의하는 강사의 강사명, 전공, 세부전공 등을 검색하여 구하는 뷰(lecturer_view4)를 생성하고 검색하시오
 select lecturer_tbl.name, lecturer_tbl.major, lecturer_tbl.field
  from lecturer_tbl, course_tbl
  where lecturer_tbl.idx=course_tbl.lecturer and (course_tbl.end_end - course_tbl.start_hour) >= 300;
+ create view lecturer_view4 as select lecturer_tbl.name, lecturer_tbl.major, lecturer_tbl.field from lecturer_tbl inner join course_tbl on lecturer_tbl.idx=course_tbl.lecturer where (course_tbl.end_end - course_tbl.start_hour) >= 300;
+select * from lecturer_view4;
 -- 각 요일(week)별로 진행하는 과목명, 학점, 강사명, 전공 등을 검색하여 구하는 뷰(course_view2)를 생성하고 검색하시오
 select week, count(course_tbl.name) as 과목수, sum(course_tbl.credit) 총학점, 
 count(course_tbl.lecturer) 해당강사수 from course_tbl group by course_tbl.week;
