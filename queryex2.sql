@@ -25,7 +25,8 @@ create view marjor_view as (select major, count(major) as cnt from lecturer_tbl 
 -- 연구분야(field)가 알고리즘이거나 운영체제인 교수의 번호, 강사명, 전공을 검색하되, 번호별로 내림차순 정렬하여 뷰(order_view)를 생성하고 검색하시오
 create view order_view as (select idx, name, major from lecturer_tbl where field='알고리즘' or field like '%운영체제%' order by idx desc);
 -- 과목명, 강사명, 전공, 학점, 시작, 종료를 검색하되, course_tbl의 lecturer(강사)와 lecturer_tbl의 idx(번호)를 참조하여 검색하시오
-select course_tbl.name, lecturer_tbl.name, lecturer_tbl.major, course_tbl.credit, course_tbl.start_hour, course_tbl.end_end from course_tbl inner join lecturer_tbl on course_tbl.lecturer=lecturer_tbl.idx;
+select course_tbl.name, lecturer_tbl.name, lecturer_tbl.major, course_tbl.credit, course_tbl.start_hour, course_tbl.end_end from course_tbl 
+inner join lecturer_tbl on course_tbl.lecturer=lecturer_tbl.idx;
 -- 각 과정에 배정된 강사의 강사명과 전공을 검색하되, course_tbl의 lecturer(강사)와 lecturer_tbl의 idx(번호)를 참조하여 구하는 뷰(lecturer_view1)를 생성하고 검색하시오
 create view lecturer_view1 as 
 (select distinct name, major from lecturer_tbl where idx in(select lecturer 
@@ -37,8 +38,7 @@ create view lecturer_view2 as
  from course_tbl));
 select * from lecturer_view2;
 -- 각 과정에 가장 많이 배정된 강사의 강사명과 전공을 검색하되, course_tbl의 lecturer(강사)와 lecturer_tbl의 idx(번호)를 참조하여 구하는 뷰(lecturer_view3)를 생성하고 검색하시오
- select name, major from lecturer_tbl where idx in 
-  (select count(lecturer) as cnt from course_tbl);
+ select name, major from lecturer_tbl where idx in (select count(lecturer) as cnt from course_tbl);
 -- 월요일에 배정된 강사의 name(과목명), credit(학점), name(강사명), major(전공), field(세부전공) 등을 구하는 뷰(monday_course_view)를 생성하고 검색하시오
 select course_tbl.name, course_tbl.credit, lecturer_tbl.name,
  lecturer_tbl.major, lecturer_tbl.field
@@ -58,3 +58,5 @@ count(course_tbl.lecturer) 해당강사수 from course_tbl group by course_tbl.w
 create view course_view2 as select week, count(course_tbl.name) as 과목수, sum(course_tbl.credit) 총학점, 
 count(course_tbl.lecturer) 해당강사수 from course_tbl group by course_tbl.week;
 select * from course_view2;
+
+commit;
