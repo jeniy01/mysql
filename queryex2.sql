@@ -38,7 +38,16 @@ create view lecturer_view2 as
  from course_tbl));
 select * from lecturer_view2;
 -- 각 과정에 가장 많이 배정된 강사의 강사명과 전공을 검색하되, course_tbl의 lecturer(강사)와 lecturer_tbl의 idx(번호)를 참조하여 구하는 뷰(lecturer_view3)를 생성하고 검색하시오
- select name, major from lecturer_tbl where idx in (select count(lecturer) as cnt from course_tbl);
+	-- 과목 테이블에서 강사별 배정된 과목수 => 3
+	select lecturer, count(lecturer) as cnt from course_tbl group by lecturer;
+	-- 과목 테이블에서 강사별 배정된 과목이 가장 많은 강사의 코드의 뷰 만들기
+	create view max_lec as (select lecturer, count(lecturer) as cnt 
+	 from course_tbl group by lecturer having cnt=3);
+	select * from max_lec;
+	-- 배정 과목이 가장 많은 강사의 뷰에서 해당 강사명과 전공을 불러오기
+	select name, major from lecturer_tbl where idx in (select lecturer from max_lec);
+create view lecturer_view3 as select name, major from lecturer_tbl where idx in (select lecturer from max_lec);
+select * from lecturer_view3;
 -- 월요일에 배정된 강사의 name(과목명), credit(학점), name(강사명), major(전공), field(세부전공) 등을 구하는 뷰(monday_course_view)를 생성하고 검색하시오
 select course_tbl.name, course_tbl.credit, lecturer_tbl.name,
  lecturer_tbl.major, lecturer_tbl.field
