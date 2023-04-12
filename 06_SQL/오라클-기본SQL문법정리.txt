@@ -1,0 +1,441 @@
+DDL(Data Definition Language) 명령 : 데이터 정의어 - 
+- 객체(테이블 또는 뷰, 인덱스, 시퀀스) 에 대한 생성, 변경, 제거 명령
+	Create : 객체 생성
+	create table 객체명(컬럼명1  타입(크기) [제약조건] ,...);
+	create view 뷰명 as 검색명령;
+	create sequence 시퀀스명 [start with 1][increment by 1][minvalue 1][maxvalue 9999][nocycle];
+		start with 시작번호, increment 증감치, minvalue 최소값, maxvalue 최대값
+		nocycle 다시 원래 번호대로 복귀안함
+	create index 인덱스명 on 테이블명(컬럼명);
+		복합 인덱스 생성 : create index 인덱스명 on 테이블명(컬럼명1, 컬럼명2);
+		유니크(UNIQUE) 인덱스 생성 : create unique index on 테이블명(컬럼명1, 컬럼명2);
+	create user 사용자아이디 identified by 비밀번호;
+
+
+	Drop : 객체 제거
+	drop table 테이블명 [cascade];
+	drop view 뷰명;
+	drop sequence 시퀀스명;
+	drop index 인덱스명;
+
+
+	Alter : 객체 구조 변경
+	테이블 컬럼 타입 및 크기 변경 : alter table 테이블명 modify 컬럼명  타입(크기);
+	테이블 컬럼 추가 : alter table 테이블명 add 컬럼명 타입(크기);
+	테이블 컬럼 제거 : alter table 테이블명 drop column 컬럼명;
+	테이블 컬럼명 변경 : alter table 테이블명 rename column 원래컬럼명 to 바꿀컬럼명;
+	인덱스명 변경 : alter index 원래인덱스명 RENAME TO 변경인덱스명;
+	인덱스 재적용(리빌드) : alter index 인덱스명 REBUILD  ----> 인덱스가 손상이 되었을 경우
+	인덱스 비활성화 : alter index 인덱스명 UNUSABLE;
+
+	Rename : 테이블이름 변경
+	rename  원본테이블명  to  변경테이블명;
+
+	Truncate : 테이블 구조는 남긴 채 데이터만 삭제
+	truncate table 테이블명;
+
+
+
+
+DML(Data Minipulation Language) : 데이터 조작어 = CRUD
+해당 테이블에 튜플(레코드)을 검색, 삽입, 삭제, 변경 명령
+
+	Create : 튜플(레코드) 삽입
+	insert into 테이블명(컬럼명1, 컬럼명2,...) values (값1, 값2,...)
+		- 해당 컬럼명과 값의 순서는 같아야하고, 타입도 일치해야함
+		name	score 	no
+		insert into(no, name, score) values (1, '김기태', 100);
+		- 컬럼명을 생략하는 경우
+		insert into 테이블명 values (값1, 값2,,,,) : 컬럼명을 지정하지 않는 대신 입력값의 개수를 모두 컬럼 수만큼 무조건 채워야하며, 컬럼의 순서도 맞아야함
+		- default 값을 적용하면서, 컬럼명을 생략하는 경우
+		insert into 테이블명 values (값1, default,..)
+		- default 값을 적용하면서, 컬럼명을 기재하는 경우
+		insert into 테이블명(col1, col3) values (값1, 값3); ---> col2는 default 값이 자동으로 적용됨
+
+	Read : 튜플(레코드) 검색
+	select [컬럼명1, 컬럼명2,...] from 테이블명 [where 조건절] [group by 그룹화할항목][order by 정렬항목]
+		select * from 테이블명;   ----> 생성된 테이블의 컬럼 순서대로 맞추어 모든 컬럼이 출력됨
+		select col1, col2, col3 from 테이블명  -----> 원하는 컬럼만 출력하는 경우
+		select col1, col3, col6 from 테이블명 where col1>=101;		(101~)
+		select col1, col3, col6 from 테이블명 where col1>=50 and col1<=100; (50~100)
+		select col1, col3, col6 from 테이블명 where col1 between 50 and 100; (50~100)
+		select col1, col3, col6 from 테이블명 where col1<50 or col1>100; (50~100 범위가 아닌 컬럼)
+		select name, city, tel from 테이블명 where city in ('서울시','고양시','수원시');
+		select name, city, tel from 테이블명 where city='서울시' or city='고양시' or city='수원시';
+		select col1, col2, col5 from 테이블명 where col3 like '%단어%';    (col3 항목의 값이 단어가 포함된 col1, col2, col5 컬럼 검색)
+		select distinct grade as '등급', sum(pay) as '등급별합계', avg(pay) as '등급별평균' count(*) as '직원수' from 테이블명 group by grade;
+			등급	등급별합계	등급별평균	직원수
+			부장  	....		.....		....
+			차장	....		.....
+			과장	....		.....
+			대리	....		.....
+			사원	....		.....
+		select * from 테이블명 order by grade desc, part asc;
+			-- 등급별로 내림정렬하여 출력하되, 등급이 같을 경우는 2차 기준 부서별로 오름차순 정렬하여 출력
+		create table emp(no number(4) primary key, name varchar2(20) not null, gcode number(3) not null, pay number(8));
+
+		insert into emp values (1, '김우주', 1, 2200000);
+		insert into emp values (2, '황병준', 3, 3600000);
+		insert into emp values (3, '조교행', 7, 6700000);
+		직원(emp)
+		사원번호(no)	직원명(name)	직위(gcode)	급여(pay)		
+		1		김우주		1		2200000
+		2		황병준		3		3600000
+		3		조교행		7		6700000
+
+		
+		create table grade_tbl(gcode number(3) primary key, grade varchar2(24) not null);		
+		insert into grade_tbl values (1, '사원');
+		insert into grade_tbl values (2, '주임');
+		insert into grade_tbl values (3, '대리');
+		insert into grade_tbl values (4, '과장');
+		insert into grade_tbl values (5, '차장');
+		insert into grade_tbl values (6, '부장대우');
+		insert into grade_tbl values (7, '부장');
+		insert into grade_tbl values (8, '임원');
+		직위(grade_tbl)
+		직위코드(gcode)	직위(grade)
+		1		사원
+		2		주임
+		3		대리
+		4		과장
+		5		차장
+		6		부장대우
+		7		부장
+		8		임원
+
+
+
+		사원번호		직원명	직위
+		1		김우주	사원
+		2		황병준	대리
+		3		조교행	부장
+		- 내부 조인
+		select a.no, a.name, b.grade from emp a inner join grade_tbl b on (a.gcode=b.gcode);
+		
+		- 스칼라 서브 쿼리 : SELECT 절에 검색할 항목 자리에 해당 컬럼만 나오도록 SELECT)
+		select emp.no, emp.name, (select grade from grade_tbl where grade_tbl.gcode=emp.gcode) as grade from emp;
+
+		- 인라인뷰 서브쿼리 : FROM 절에 검색결과를 테이블 형태로 받아서 다시 SELECT)
+		select no, name, grade from (select emp.no, emp.name, grade_tbl.grade from emp, grade_tbl where emp.gcode=grade_tbl.gcode);
+
+
+		-  중첩 서브쿼리 : WHERE 절에 IN(=) 또는 NOT IN, ANY, ALL 연산자를 활용하여 다시 SELECT
+		select no, name, grade from emp, grade_tbl where emp.gcode=grade_tbl.gcode;
+
+		select grade from grade_tbl where gcode in (select gcode from emp);
+
+		select * from emp where emp.gcode in (select gcode from grade_tbl where grade_tbl.gcode=emp.gcode);
+
+		select no, name, grade from (select emp.no, emp.name, emp.gcode, grade_tbl.grade from emp, grade_tbl where emp.gcode=grade_tbl.gcode) where gcode in (select gcode from grade_tbl);
+
+
+
+
+
+	Update
+	update 테이블명 set 컬럼명=바꿀값 [where 조건절]
+		- 모든 튜플(레코드)가 변경이 되어야 할 때(예-급여가 모두 105% 인상)
+		update emp set pay=pay*1.05;
+		- 여러 컬럼의 데이터 변경
+		update 테이블명 set 컬럼명1=바꿀값1, 컬럼명2='바꿀값' where 컬럼명3=값;
+
+	Delete
+	delete from 테이블명 [where 조건절]
+		- 모든 튜플(레코드)를 삭제
+		delete from 테이블명;
+		- 특정 튜플(레코드)를 삭제
+		delete from 테이블명 where 조건절;
+
+
+DCL(Data Control Language) : 데이터 제어어
+사용자 또는 권한, 트랜잭션 등을 제어하는 명령
+
+	사용자 계정 추가
+	create user 계정명 identified by 비밀번호;
+
+	사용자 계정 제거
+	drop user 계정명 [cascade];
+
+	비밀번호 변경
+	alter user 계정명 identified by 비밀번호;
+
+	접속 계정 변경
+	conn  계정명/비밀번호
+
+	모든 권한 부여
+	grant connect, resource, dba to 계정명;
+
+	모든 권한 회수
+	revoke connect, resource, dba from 계정명;
+
+	현재 접속(로그인)한 계정 확인
+	show user;
+	select user from dual;
+	
+	모든 사용자 조회
+	select * from all_users;
+	select * from user_users;
+
+	DBA 사용자 조회
+	select * from dba_users;
+
+
+
+
+	해당 계정의 롤 확인
+	select * from dba_role_privs where grantee='계정';
+	
+	해당 계정이 소유하고 있는 테이블 확인
+	select * from dba_tab_privs where owner='계정';
+
+	해당 계정의 시스템 권한
+	select * from dba_sys_privs where grantee='계정';
+
+	전체 롤 확인
+	select * from dba_roles;
+
+	DBA의 사용자 아이디 조회
+	select username from dba_users;
+
+	데이터 사전 명령( DBA_ > ALL_ > USER_ )
+	dba_ : 시스템 접근 권한이 있는, all_ : 접근 권한이 있는, user_ : 자신이 소유한 
+	select * from dba_tables;
+	select * from dba_tab_columns;
+	select * from dba_tab_coments;
+	select * from dba_constraints;
+	select * from all_tables;
+	select * from all_tab_columns;
+	select * from all_tab_coments;
+	select * from all_constraints;
+	select * from user_tables;
+	select * from user_tab_columns;
+	select * from user_tab_coments;
+	select * from user_constraints;
+
+	- 현재 사용자의 테이블 중에서 테이블명이 2022이 포함된 테이블명만 검색
+	select table_name from user_tables where table_name like '%2022%';
+
+	테이블 구조 확인
+	desc 테이블명;
+
+	grant connect, resource, dba to 계정명;
+	
+connect, resource, dba 곳은 권한이라고 하며, 이 자리에 아래와 같은 권한을 부여(회수)해 줄 수도 있음
+시스템 권한
+구분	시스템 권한 종류
+SESSION	
+	CREATE SESSION
+	ALTER SESSION
+	RESTRICTED SESSION
+TABLE	
+	CREATE TABLE
+	CREATE ANY TABLE
+	ALTER ANY TABLE
+	DROP ANY TABLE
+	SELECT ANY TABLE
+	UPDATE ANY TABLE
+	DELETE ANY TABLE
+TABLESPACE	
+	CREATE TABLESPACE
+	ALTER TABLESPACE
+	DROP TABLESPACE
+	UNLIMITED TABLESPACE
+INDEX	
+	CREATE INDEX
+	ALTER INDEX
+	RESTRICTED INDEX
+
+
+	set linesize 300; 	# 한 줄당 출력 글자수 설정
+	set pagesize 100;	# 한 화면당 출력 튜플수 설정
+	col 컬럼명 format a글자수;	# 각 컬럼당 출력글자수 설정
+
+
+
+
+
+데이터 입출력 요건에 맞게 과정 정보, 수강생 정보, 교사 정보의 관련된 테이블을 생성하고, 해당 데이터를 추가하시오.
+ 가) 과정 정보 명세서(테이블명 : tbl_class_202201)
+create table tbl_class_202201(class_seq number(4) not null, regist_month char(8) not null, c_no char(5) not null, class_area varchar2(15), tution number(8), teacher_code char(3), constraint tbl_pk primary key (regist_month, c_no));
+순서 	컬럼ID 		컬럼명 	형태 	길이 	NULL 		비고
+1 	class_seq 		순번 	number 	4 	NOT NULL
+2 	regist_month 	개강월 	char 	8 	NOT NULL 	Primary key
+3 	c_no 		과정번호 	char 	5 	NOT NULL 	Primary key
+4 	class_area 	캠퍼스 	varchar2 	15
+5 	tution 		수강료 	number 	8
+6 	teacher_code 	교사코드 	char 	3 
+
+시퀀스명 class_seq
+
+[과정 정보 샘플 데이터]
+순번 	개강월 	과정번호 	캠퍼스 	수강료 	교사코드
+1 	202203 	10001 	서울본원 	100000 	100
+2 	202203 	10002 	성남분원 	100000 	100
+3 	202203 	10003 	부산분원 	200000 	200
+4 	202203 	20001 	광주분원 	150000 	300
+5 	202203 	20002 	대전분원 	200000 	400
+
+
+create table tbl_class_202201(class_seq number(4) not null, regist_month char(8) not null, c_no char(5) not null, class_area varchar2(15), tution number(8), teacher_code char(3), constraint tbl_pk primary key (regist_month, c_no));
+
+create sequence class_seq;
+
+insert into tbl_class_202201 values (class_seq.nextval, '220203', '10001', '서울본원', 100000, '100');
+insert into tbl_class_202201 values (class_seq.nextval, '220203', '10002', '성남분원', 100000, '100');
+insert into tbl_class_202201 values (class_seq.nextval, '220203', '10003', '부산분원', 200000, '200');
+insert into tbl_class_202201 values (class_seq.nextval, '220203', '20001', '광주본원', 150000, '300');
+insert into tbl_class_202201 values (class_seq.nextval, '220203', '20002', '대전분원', 200000, '400');
+
+select * from tbl_class_202201;
+
+
+
+ 나. 수강 신청 정보 명세서(테이블 명 : tbl_member_202201)
+순서 	컬럼ID 		컬럼명 		형태 	길이 	NULL 		비고
+1 	member_seq 	순번 		number 	4 	NOT NULL 	Primary key
+2 	c_no 		과정코드 		char 	5 	NOT NULL
+3 	c_name 		수강생명 		varchar2 	12
+4 	phone 		전화번호 		varchar2 	11
+5 	address 		주소 		varchar2 	50
+6 	regist_date 	수강등록일 	char 	8
+7 	c_type 		수강등급 		varchar2 	12 
+
+[수강 신청 정보 샘플 데이터]
+순번 	과정코드 	수강생명 	전화번호 		주소 		수강등록일 	수강등급
+1 	10001 	이다영 	01022221111 	서울시 강남구 	20220101 	일반
+2 	10002 	이유섭 	01011112222 	서울시 성북구 	20220102 	일반
+3 	10003 	이재호 	01022223333 	성남시 분당구 	20220103 	일반
+4 	10004 	조태정 	01033334444 	부산시 서구 	20220104 	일반
+5 	20001 	황병준 	01044445555 	광주시 남구 	20220105 	VIP
+6 	20002 	전재영 	01055556666 	대전시 유성구 	20220106 	VIP
+
+
+create table tbl_member_202201(member_seq number(4) primary key, c_no char(5) not null, c_name  varchar2(12), phone varchar2(11), address varchar2(50), regist_date char(8), c_type varchar2(12));
+
+create sequence member_seq start with 1 increment by 1 minvalue 1 maxvalue 9999 nocycle;
+start with 시작번호, increment 증감치, minvalue 최소값, maxvalue 최대값
+nocycle 다시 원래 번호대로 복귀안함
+
+insert into tbl_member_202201 values (member_seq.nextval, '10001', '이다영', '01022221111', '서울시 강남구', '20220101', '일반');
+insert into tbl_member_202201 values (member_seq.nextval, '10002', '이유섭', '01011112222', '서울시 성북구', '20220102', '일반');
+insert into tbl_member_202201 values (member_seq.nextval, '10003', '이재호', '01022223333', '성남시 분당구', '20220103', '일반');
+insert into tbl_member_202201 values (member_seq.nextval, '10004', '조태정', '01033334444', '부산시 서구', '20220104', '일반');
+insert into tbl_member_202201 values (member_seq.nextval, '20001', '황병준', '01044445555', '광주시 남구', '20220105', 'VIP');
+insert into tbl_member_202201 values (member_seq.nextval, '20002', '전재영', '01055556666', '대전시 유성구', '20220106', 'VIP');
+
+
+
+다. 교사 정보 명세서(테이블 명 : tbl_teacher_202201)
+순서 	컬럼ID 		컬럼명 	형태 	길이 	NULL 		비고
+1 	teacher_seq 	순번 	number 	4 	NOT NULL
+2 	teacher_code 	교사코드 	char 	3 	NOT NULL 	Primary key
+3 	class_name 	과정명 	varchar2 	12
+4 	teacher_name 	교사명 	varchar2 	12
+5 	class_price 	배정금액 	number 	8	기본값  100000
+6 	teacher_regist_date 등록일 	char 	8
+7	contract		계약일	date		기본값  오늘날짜
+
+[교사 정보 샘플 데이터]
+순번 	교사코드 	과정명 	교사명 	배정금액 	등록일
+5 	100 	초급반 	김초급 	100000 	20220101
+6 	200 	중급반 	이중급 	200000 	20220102
+7 	300 	고급반 	박고급 	300000 	20220103
+8 	400 	심화반 	조심화 	400000 	20220104
+
+
+create table tbl_teacher_202201(teacher_seq number(4) not null, 
+teacher_code char(3) primary key, 
+class_name  varchar2(12), 
+teacher_name varchar2(12), 
+class_price number(8) default 100000, 
+teacher_regist_date char(8), 
+contract  date default sysdate);
+
+create sequence teacher_seq start with 5; 
+
+insert into tbl_teacher_202201(teacher_seq, teacher_code, class_name, teacher_name, teacher_regist_date)
+values (teacher_seq.nextval, '100', '초급반', '김초급', '20220101');
+
+insert into tbl_teacher_202201
+values (teacher_seq.nextval, '100', '초급반', '김초급', default, '20220101', default);
+
+insert into tbl_teacher_202201(teacher_seq, teacher_code, class_name, teacher_name, class_price, teacher_regist_date) values (teacher_seq.nextval, '200', '중급반', '이중급', 200000, '20220101');
+
+insert into tbl_teacher_202201(teacher_seq, teacher_code, class_name, teacher_name, class_price, teacher_regist_date) values (teacher_seq.nextval, '300', '고급반', '박고급', 300000, '20220101');
+
+insert into tbl_teacher_202201 values (teacher_seq.nextval, '400', '심화반', '조심화', 400000, '20220101', default);
+
+
+
+라. 게시판 정보 명세서(테이블 명 : tbl_board_202201)
+순서 	컬럼ID 		컬럼명 	형태 	길이 	NULL 		비고
+1 	board_seq 	순번 	number 	4 	NOT NULL	Primary key
+2 	title 		제목 	varchar2 	200 	NOT NULL 	
+3 	content 		내용 	varchar2 	500
+4 	resdate 		작성일 	date 	
+5 	author 		작성자 	char 	40	
+
+
+[게시판 정보 샘플 데이터]
+순번 	제목 		내용 				작성자 	작성일
+1 	게시글1제목 	첫 번째 게시글에 대한 내용입니다. 	관리자 	2023/01/01
+2 	게시글제목2 	두 번째 공지사항입니다.		초급반	2023/01/02
+3 	게시글3제목 	세 번째 업로드 자료입니다.		고급반 	2023/01/03
+4 	게시글제목4 	네 번째 게시글의 내용입니다. 		조심화 	2023/01/04
+
+
+create table tbl_board_202201(board_seq number(4) primary key, 
+title  varchar2(200), 
+content varchar2(500), 
+resdate date, 
+author char(40));
+
+create sequence board_seq start with 1; 
+
+insert into tbl_board_202201
+values (board_seq.nextval, '게시글1제목', '첫 번째 게시글에 대한 내용입니다.', '2023-01-01', '관리자');
+
+insert into tbl_board_202201
+values (board_seq.nextval, '게시글제목2', '두 번째 공지사항입니다.', '2023-01-02', '초급반');
+
+insert into tbl_board_202201
+values (board_seq.nextval, '게시글3제목', '세 번째 업로드 자료입니다.', '2023-01-03', '고급반');
+
+insert into tbl_board_202201
+values (board_seq.nextval, '게시글제목4', '네 번째 게시글의 내용입니다.', '2023-01-04', '조심화');
+
+select board_seq, title, content, author, to_char(resdate, 'YYYY/MM/DD') as resdate  from tbl_board_202201;
+
+to_char('2023-01-01', '표시형식코드') : 날짜 데이터를 문자열로 변경하면서 표시형식 지정
+to_date('2023-01-01', '표시형식코드') : 문자열 데이터를 날짜 데이터로 변경하면서 표시형식 지정
+
+
+
+hr 계정 활성화
+	1. 잠금 풀기 : alter user hr account unlock;
+
+	2. 비밀번호 설정 : alter user hr identified by 1234;
+
+	3. 접속 :  conn hr/1234;
+		
+	4. 사용 가능한 테이블 목록 보기 : select table_name from user_tables;
+
+
+
+scott 계정 활성화
+	1. 관리자 계정으로 로그인 : conn system/1234;
+
+	※ system 계정의 비밀번호 분실시
+	sqlplus sys/1234 as sysdba -> alter user system identified by 1234;
+
+	2. 외부 sql 실행
+	SQL> @C:\oraclexe\app\oracle\product\11.2.0\server\rdbms\admin\scott.sql 엔터
+
+	3. 계정 잠금 풀기 : alter user scott account unlock;
+
+	4. 비밀번호 설정 : alter user scott identified by tiger;
+
+	5. 계정 로그인 : conn scott/tiger
+
+	6. 사용 가능한 테이블 목록 보기 : select table_name from user_tables;

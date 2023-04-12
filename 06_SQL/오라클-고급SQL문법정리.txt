@@ -1,0 +1,125 @@
+	테이블 복제
+	create table 복제테이블명 as select * from 원본테이블명;
+
+	원하는 컬럼만 테이블 복제
+	create table 복제테이블명 as select 컬럼명1, 컬럼명2,... from 원본테이블명;
+
+	특정 데이터만 테이블 복제
+	create table 복제테이블명 as select * from 원본테이블명 where 조건절;
+
+	테이블 구조만 복제
+	create table 복제테이블명 as select * from 원본테이블명 where 1=2;
+
+	같은 구조를 갖는 테이블에 데이터만 복사
+	insert into 복사할테이블명 select * from 원본테이블명 [where 절];
+
+	뷰 작성
+	create view 뷰명 as select ~;
+
+	단일 기본키 생성
+	create table 테이블명(컬럼명  타입  primary key,....);
+
+
+	복합 기본키 생성
+	create table 테이블명(컬럼명  타입,.... constraint  키이름  primary key(컬럼명1, 컬럼명2));
+
+
+	기본키 추가
+	alter table 테이블명 add primary key(컬럼명1,...);
+
+
+	기본키 삭제
+	alter table 테이블명 drop primary key;
+
+
+	외래키 생성
+	create table 테이블명(컬럼명  타입,.... constraint 외래키명 foreign key(컬럼명) references 참조테이블명 (참조할컬럼명));
+
+	외래키 추가
+	alter table 테이블명 add constraint  외래키명 foreign key(컬럼명) references 참조테이블명 (참조할컬럼명);
+
+	외래키 삭제
+	alter table 테이블명 drop constraint 외래키명;
+
+	컬럼 추가
+	alter table 테이블명 add(컬럼명  타입(크기));
+
+	컬럼명 변경
+	alter table 테이블명 rename column 원래컬럼명 to 바꿀컬럼명;
+
+	컬럼 타입 변경
+	alter table 테이블명 modify(컬럼명 타입(크기));
+
+	컬럼 삭제
+	alter table 테이블명 drop column 컬럼명;
+
+
+	다중 테이블 검색
+	select  테이블1.*  테이블2.* from 테이블1, 테이블2;
+
+
+	크로스(자동) 조인 다중 테이블 검색
+	select 테이블1.컬럼1, 테이블2.컬럼1,... from  테이블1, 테이블2 where 테이블1.컬럼3=테이블2.컬럼3;
+
+
+	다중 테이블 일치 검색(in) = 테이블2과 일치하는 테이블1 데이터 검색
+	select * from 테이블1 where 컬럼명 in (select 컬럼명 from 테이블2);
+
+
+	다중 테이블 불일치 검색(not in) = 테이블2에는 없고 테이블1만 있는 데이터 검색
+	select * from 테이블1 where 컬럼명 not in (select 컬럼명 from 테이블2);
+
+
+	내부 조인 다중 테이블 검색(두 개의 테이블에 있는 데이터에서 일치하는 데이터만 검색) = 일치 검색
+	select 알1.컬럼, 알2.컬럼,... from 테이블1 알1 inner join 테이블2 알2 on 알1.컬럼=알2.컬럼;
+
+
+	외부 조인1 다중 테이블 검색(왼쪽 테이블에만 있는 데이터만 검색) = 불일치 검색1
+	select 알1.컬럼, 알2.컬럼,... from 테이블1 알1 left join 테이블2 알2 on 알1.컬럼=알2.컬럼;
+
+
+	외부 조인2 다중 테이블 검색(오른쪽 테이블에만 있는 데이터만 검색) = 불일치 검색2
+	select 알1.컬럼, 알2.컬럼,... from 테이블1 알1 right join 테이블2 알2 on 알1.컬럼=알2.컬럼;
+
+
+	집합연산
+	select ~ [UNION | UNION ALL | INTERSECT | MINUS] select ~
+	UNION		두 집합에 대해 중복되는 행을 제외한 합집합
+	UNION ALL	두 집합에 대해 중복되는 행을 포함한 합집합
+	MINUS		두 집합 간의 차집합
+	INTERSECT	두 집합 간의 교집합
+
+	select * from member_2022 union select * from member_2023
+
+	select * from member_2022 intersect select * from member_2023
+
+	select * from member_2022 minus select * from member_2023
+
+
+	트랜잭션 수행
+	 성공 수행 : commit;
+	 실패 수행 : rollback;
+
+	트랜잭션 실습
+		create table mem(id varchar2(10), pw varchar2(10));
+		insert into mem('kkt', '1234');
+		insert into mem('kbs', '4321');	
+		insert into mem('pjh', '1004');
+		insert into mem('jjy', '7979');
+		commit;
+		update mem set pw='9999' where id='kbs';
+		delete from mem where id='jjy';
+		rollback;
+		select * from mem;
+
+		- 아이디가 a인 사람이 100000을 아이디가 b인 사람에게 계좌이체하는 경우
+		update account set balance=balance-100000 where id="a";
+		update account set balance=balance+100000 where id="b";
+		
+
+
+
+	
+
+
+
