@@ -57,3 +57,73 @@ select * from tbl_resv_202108;
 	-- ROLLBACK to my1; 작업을 실패로 처리
 	--update tbl_emp_202108 set empname='김상무' where empno='1001';
 	-- COMMIT to my1; 작업을 성공적으로 처리
+
+create table cars(id serial primary key, maker text not null, model text not null, year integer not null, color text not null, created_at timestamp default now() not null);
+insert into cars values(default,'Kia','Seltos',2022,'Silver',default);
+insert into cars values(default,'Hyundai','Sonata',2021,'Black',default);
+insert into cars values(default,'Genesis','G80',2020,'Red',default);
+insert into cars values(default,'SsangYong','Korando',2019,'Blue',default);
+insert into cars values(default,'Benz','EQE',2023,'White',default);
+insert into cars values(default,'Audi','A3',2021,'Silver',default);
+insert into cars values(default,'Mini','Hatch',2022,'Yellow',default);
+update cars set created_at='2023-01-01 12:00:00' where model='Sonata';
+update cars set color='Green' where maker='Kia' and model='Seltos';
+delete from cars where maker='Genesis' and model='G80';
+select * from cars;
+
+create table countries(country_code char(2) primary key, country_name text unique);
+insert into countries values('us','United States');
+insert into countries values('ca','Canada');
+insert into countries values('ko','Republic of Korea');
+update countries set country_name=E'People\'s Republic of Korea' where country_code='pk';
+insert into countries values('jp','Japen');
+insert into countries values('mx','Mexico');
+insert into countries values('au','Austrailia');
+insert into countries values('gb','United Kingdom');
+insert into countries values('de','Germany');
+insert into countries values('ll','Loompaland');
+insert into countries values('ch','China');
+insert into countries values('rc','Taiwan');
+insert into countries values('tl','Thailand');
+insert into countries values('fr','Frence');
+insert into countries values('it','ltalia');
+insert into countries values('gr','Greece');
+insert into countries values('es','Spain');
+select * from countries;
+
+create table cities(name text, postal_code varchar(9) primary key, country_code char(2) constraint fk_code references countries(country_code));
+insert into cities values('Toronto','M4C1B5','ca');
+insert into cities values('Portland','0187200','us');
+insert into cities values('Newyork','0174200','us');
+insert into cities values('Los Angeles','0142800','us');
+insert into cities values('Washington','0118200','us');
+insert into cities values('Tokyo','0811100','jp');
+insert into cities values('Pusan','0826200','ko');
+insert into cities values('Seoul','0822100','ko');
+insert into cities values('Daejeon','0824200','ko');
+insert into cities values('Goyang','0823120','ko');
+insert into cities values('Daegu','0826300','ko');
+insert into cities values('Kwangju','0825200','ko');
+insert into cities values('Sapporo','0812300','jp');
+insert into cities values('Sanghi','0724210','ch');
+insert into cities values('Beijing','0721100','ch');
+insert into cities values('Mexico City','0281240','mx');
+insert into cities values('Pyongyang','0828200','pk');
+select * from cities;
+-- 내부 조인을 활용하여 국가코드, 국가명, 도시명을 검색하여라
+select cities.*, country_name from cities inner join countries on cities.country_code=countries.country_code;
+
+create table venues(venue_id serial primary key, name varchar(255), street_address text, type char(7) 
+					check(type in('public','private')) default 'public', postal_code varchar(9) 
+					constraint fk_vn references cities(postal_code), country_code char(2));
+insert into venues values(default,'Baijing',default,default,'0721100','ch');
+insert into venues values(default,'Goyang',default,default,'0823120','ko');
+insert into venues values(default,'Newyork',default,default,'0174200','us');
+insert into venues values(default,'Sapporo',default,default,'0812300','jp');
+insert into venues values(default,'Toronto',default,default,'M4C1B5','ca');
+update venues set venue_id=1, street_address='1 National Stadium S Rd, Chaoyang, China' where name='Baijing';
+update venues set venue_id=2, street_address='387-7, Songsan-ro, ilsanseo-gu, Goyang-si, Gyeonggi-do, Republic of Korea' where name='Goyang';
+update venues set venue_id=3, street_address='1 East 161st Street, Newyork city, New York State, United States Ameria' where name='Newyork';
+update venues set venue_id=4, street_address='1274, Miyanomori, Chuo-ku, Sapporo-shi, Hokkaido, Japan' where name='Sapporo';
+update venues set venue_id=5, street_address='1 Blue Jays Way, Toronto city, Ontario State, Canada' where name='Toronto';
+select * from venues;
