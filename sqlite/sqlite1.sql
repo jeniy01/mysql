@@ -1,0 +1,13 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE test1(id integer, pw varchar(20), name varchar(16));
+INSERT INTO test1 VALUES(1,'1234','기태');
+INSERT INTO test1 VALUES(2,'4321','병준');
+INSERT INTO test1 VALUES(3,'7979','재영');
+INSERT INTO test1 VALUES(4,'8989','세종');
+INSERT INTO test1 VALUES(5,'5555','우주');
+INSERT INTO test1 VALUES(6,'8888','승기');
+INSERT INTO test1 VALUES(7,'2222','규섭');
+INSERT INTO test1 VALUES(8,'4242','허준');
+INSERT INTO test1 VALUES(9,'5421','다영');
+COMMIT;
