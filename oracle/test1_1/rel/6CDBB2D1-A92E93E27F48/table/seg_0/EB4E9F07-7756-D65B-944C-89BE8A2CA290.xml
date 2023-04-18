@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="EB4E9F07-7756-D65B-944C-89BE8A2CA290" schemaObject="15B3D132-1887-C4CA-D0FC-F457B3187ABA" name="TBL_CLASS_2204">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TEST1</sourceObjSchema>
+<sourceObjName>TBL_CLASS_2204</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>7607952E-0125-5054-E083-FE21FA77AA23</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="CLASS_SEQ" id="41D22C3D-4763-808F-075F-F5353ECD83C1">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>CLASS_SEQ</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>B9452BA8-8FC1-64B6-2885-E2AF288FDBCC</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,4,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REGIST_MONTH" id="85148990-370B-247C-6B14-C956AFB18B2F">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>REGIST_MONTH</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>68242131-E900-6DCF-1FA6-5AE48C9B45E0</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>8 BYTE</dataTypeSize>
+<ownDataTypeParameters>8 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="C_NO" id="42DB3E23-6CA7-2639-5A0C-245C9EEC15D2">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>C_NO</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>1C8F3784-6AA5-F20A-2672-42FCDAFCD600</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>5 BYTE</dataTypeSize>
+<ownDataTypeParameters>5 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLASS_AREA" id="E5F5430F-C764-C931-5827-81B2175A8A65">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>CLASS_AREA</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>DA02C5FF-736C-AD6C-ABDF-97FAC109BC26</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 BYTE</dataTypeSize>
+<ownDataTypeParameters>15 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TUTION" id="C0B86DBB-C442-B89C-85E2-D945B08EE75B">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>TUTION</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>F864AA94-5D65-D1D6-EDDD-2F347173E917</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,8,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_CODE" id="D5F06E9E-2308-60C9-FF85-DD9A2D9FA795">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>TEACHER_CODE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>F7F817A3-19AE-A373-E874-F4D8E8883568</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLASSROOM" id="413E906A-28AC-F4C7-8D2C-5DB639E3DD1B">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_CLASS_2204</sourceObjSchema>
+<sourceObjName>CLASSROOM</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>4755451E-B45A-E481-615A-4A7EE06204AE</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="TBL_CLASS_2204" directorySegmentName="seg_0" id="EB4E9F07-7756-D65B-944C-89BE8A2CA290">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<schemaObject>15B3D132-1887-C4CA-D0FC-F457B3187ABA</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4614D896-B5C6-3F7A-9C49-446256560E96</segment>
+<tableSpace>ED6F9C55-434D-CC3D-8FC0-735BDB8F02DE</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="CLASSROOM" id="413E906A-28AC-F4C7-8D2C-5DB639E3DD1B">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CLASS_SEQ" id="41D22C3D-4763-808F-075F-F5353ECD83C1">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="C_NO" id="42DB3E23-6CA7-2639-5A0C-245C9EEC15D2">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="REGIST_MONTH" id="85148990-370B-247C-6B14-C956AFB18B2F">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TUTION" id="C0B86DBB-C442-B89C-85E2-D945B08EE75B">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEACHER_CODE" id="D5F06E9E-2308-60C9-FF85-DD9A2D9FA795">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CLASS_AREA" id="E5F5430F-C764-C931-5827-81B2175A8A65">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+</TableProxyOraclev11g>

@@ -45,6 +45,7 @@ insert into tbl_teacher values (7, '300', '고급반', '박고급', 300000, '202
 insert into tbl_teacher values (8, '400', '심화반', '조심화', 400000, '20220104', default);
 select * from tbl_teacher;
 desc tbl_teacher;
+alter table tbl_teacher add(contract date default sysdate);
 
 insert into tbl_class values (6, '202203', '10004', '수원분원', 200000, '100', default);
 insert into tbl_class values (7, '202203', '20003', '청주분원', 150000, '400', default);
@@ -100,7 +101,6 @@ select a.class_area, b.c_name, b.phone, b.address, b.c_type from tbl_course a in
 
 select a.member_seq, c.class_name, a.c_name, a.phone, a.address, b.class_area from tbl_member a inner join tbl_course b on a.cno=b.c_no inner join tbl_teacher c on b.teacher_code=c.teacher_code;
 
---tbl_course와 tbl_member를 참조하여 과정코드(a-member-cno), 과정명(c-teacher-class_name), 수강료합계(sum(b-course-tution))를 조회하는 쿼리를 작성하고 실행
 select a.cno, c.class_name, sum(b.tution) 수강료합계 from tbl_member a inner join tbl_course b on a.cno=b.c_no inner join tbl_teacher c on b.teacher_code=c.teacher_code group by a.cno, b.tution, c.class_name;
 
 create table tbl_member_2202 as select * from tbl_member;

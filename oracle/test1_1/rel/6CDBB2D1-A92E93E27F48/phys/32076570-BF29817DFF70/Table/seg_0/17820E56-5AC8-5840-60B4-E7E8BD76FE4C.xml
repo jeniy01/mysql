@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="TBL_TEACHER" directorySegmentName="seg_0" id="17820E56-5AC8-5840-60B4-E7E8BD76FE4C">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<schemaObject>15B3D132-1887-C4CA-D0FC-F457B3187ABA</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4614D896-B5C6-3F7A-9C49-446256560E96</segment>
+<tableSpace>ED6F9C55-434D-CC3D-8FC0-735BDB8F02DE</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="CLASS_PRICE" id="0663CBD6-FAF3-E262-CABB-0A77A1A7BFDC">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CONTRACT" id="214206A9-0FBB-8B1B-11C4-CCDC173F5496">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<defaultValue>sysdate</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="CLASS_NAME" id="3173758E-F736-B40C-EE3C-6021B367825B">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEACHER_CODE" id="A79BE53F-1BFF-A88B-38DD-5AA895ADF2AB">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEACHER_REGIST_DATE" id="C317765D-F0B7-C980-80A9-07FCAD45775D">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEACHER_NAME" id="C9833A98-1C4A-5987-EDB5-78B557EB1701">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEACHER_SEQ" id="F1A1C843-C503-56A2-3FA5-2D3672D14E73">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="TBL_TEACHER_PK" id="D1D61C0B-35CB-BD0B-1CED-C104BEF30B54">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:04 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<schemaObject>15B3D132-1887-C4CA-D0FC-F457B3187ABA</schemaObject>
+<segment>89432A20-4BE3-CEAF-886D-C6AB9FE17DE7</segment>
+<tableSpace>ED6F9C55-434D-CC3D-8FC0-735BDB8F02DE</tableSpace>
+<indexSegment>89432A20-4BE3-CEAF-886D-C6AB9FE17DE7</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev11g>

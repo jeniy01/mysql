@@ -1,0 +1,51 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev11g class="oracle.dbtools.crest.model.design.storage.oracle.v11g.TableProxyOraclev11g" name="TBL_MEMBER_2301" directorySegmentName="seg_0" id="EF68041D-7D1C-5910-009E-E7274224E58E">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<schemaObject>15B3D132-1887-C4CA-D0FC-F457B3187ABA</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>4614D896-B5C6-3F7A-9C49-446256560E96</segment>
+<tableSpace>ED6F9C55-434D-CC3D-8FC0-735BDB8F02DE</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="C_TYPE" id="1AA52F49-C37E-839B-066E-A6A2F9FF996A">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CNO" id="54FEAC26-F2DC-9484-6A27-5A7833907FCA">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ADDRESS" id="592EC098-C1B8-8520-B60D-07DBFA352991">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PHONE" id="643CDFD9-72C7-0F17-804E-9089BB6A36D7">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MEMBER_SEQ" id="C406E4A7-0C4B-95A3-8A02-50F4B4CCE598">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="C_NAME" id="CF07163D-09ED-0691-8EC5-A99B698C9375">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="REGIST_DATE" id="E4BC56BD-7039-9FFD-A1F9-B694B6840364">
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+</TableProxyOraclev11g>

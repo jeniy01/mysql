@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5D093278-E7B4-308E-4C9E-40D8C0407F04" schemaObject="15B3D132-1887-C4CA-D0FC-F457B3187ABA" name="TBL_MEMBER_2202">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TEST1</sourceObjSchema>
+<sourceObjName>TBL_MEMBER_2202</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>D0EEFEC1-5BA9-0A11-49C4-48BFF9C474E4</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="MEMBER_SEQ" id="6CF73510-42AF-029E-E4EC-B9F1B557A2CC">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>MEMBER_SEQ</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>62FE27C8-9C26-32A8-824A-BCEABD7DE5ED</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,4,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CNO" id="D5A8B388-20E2-7A70-DB5A-EDF21B311B3D">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>CNO</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>F39E79E1-8B2F-C293-4B4B-2BE36A6FE3C3</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>5 BYTE</dataTypeSize>
+<ownDataTypeParameters>5 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="C_NAME" id="57D5823B-599D-5323-6C0E-3800C160C7C4">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>C_NAME</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>5A0B07C0-CA29-638A-48F1-056443BC5832</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PHONE" id="8AC204AC-5CD3-57DF-981F-B2873DFFC5F3">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>PHONE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>E40BBF5D-1E1B-91DF-D766-B07E6433097F</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>11 BYTE</dataTypeSize>
+<ownDataTypeParameters>11 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ADDRESS" id="69C54EB8-4569-8EBC-7392-F2953F24B655">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>ADDRESS</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>D1309BFD-2B60-FC28-DC84-7BEABED57B63</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50 BYTE</dataTypeSize>
+<ownDataTypeParameters>50 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REGIST_DATE" id="71303D1C-F1CF-4EF3-5C29-BF1E627DB4F7">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>REGIST_DATE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>BBF52367-5DBE-A1D0-7E48-6A6758F2CD77</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>8 BYTE</dataTypeSize>
+<ownDataTypeParameters>8 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="C_TYPE" id="A1849CF0-EE19-90C2-45D9-B7DA41167069">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_MEMBER_2202</sourceObjSchema>
+<sourceObjName>C_TYPE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 07:12:38 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>629833EF-B057-8C5E-4DAC-AD6B866E5C82</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

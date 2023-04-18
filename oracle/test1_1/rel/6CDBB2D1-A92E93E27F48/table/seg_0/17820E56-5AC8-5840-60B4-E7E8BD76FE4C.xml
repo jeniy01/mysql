@@ -1,0 +1,145 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="17820E56-5AC8-5840-60B4-E7E8BD76FE4C" schemaObject="15B3D132-1887-C4CA-D0FC-F457B3187ABA" name="TBL_TEACHER">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TEST1</sourceObjSchema>
+<sourceObjName>TBL_TEACHER</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>723B1182-E887-DA8E-E770-8E5220A7E115</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="TEACHER_SEQ" id="F1A1C843-C503-56A2-3FA5-2D3672D14E73">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>TEACHER_SEQ</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>193AAA39-0476-7CE9-3DE8-ACD95FBD1151</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,4,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_CODE" id="A79BE53F-1BFF-A88B-38DD-5AA895ADF2AB">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>TEACHER_CODE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>69AA27A8-0ECF-2C02-6816-C3A87C2D1510</importedID>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>3 BYTE</dataTypeSize>
+<ownDataTypeParameters>3 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLASS_NAME" id="3173758E-F736-B40C-EE3C-6021B367825B">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>CLASS_NAME</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>750747DF-C340-F7AE-E2CE-816F2ACBB6BD</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_NAME" id="C9833A98-1C4A-5987-EDB5-78B557EB1701">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>TEACHER_NAME</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>7573C323-1291-38C2-654F-410325C70628</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12 BYTE</dataTypeSize>
+<ownDataTypeParameters>12 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLASS_PRICE" id="0663CBD6-FAF3-E262-CABB-0A77A1A7BFDC">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>CLASS_PRICE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>6DE623DC-046E-391C-59DD-6C7578F4B3D3</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,8,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TEACHER_REGIST_DATE" id="C317765D-F0B7-C980-80A9-07FCAD45775D">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>TEACHER_REGIST_DATE</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>F8C97ADD-4FD1-687F-7975-BDC772796EBA</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>8 BYTE</dataTypeSize>
+<ownDataTypeParameters>8 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CONTRACT" id="214206A9-0FBB-8B1B-11C4-CCDC173F5496">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TBL_TEACHER</sourceObjSchema>
+<sourceObjName>CONTRACT</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>9FF2ACBE-C18C-F1FE-00FE-AB24D2C5E3AB</importedID>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<defaultValue>sysdate</defaultValue>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D1D61C0B-35CB-BD0B-1CED-C104BEF30B54" schemaObject="15B3D132-1887-C4CA-D0FC-F457B3187ABA" name="TBL_TEACHER_PK">
+<sourceConnName>test1</sourceConnName>
+<sourceObjSchema>TEST1</sourceObjSchema>
+<sourceObjName>SYS_C007145</sourceObjName>
+<createdBy>201-18</createdBy>
+<createdTime>2023-04-17 02:43:03 UTC</createdTime>
+<ownerDesignName>test1_1</ownerDesignName>
+<importedID>DF656109-2315-D883-DD1B-608F02BD94E5</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="A79BE53F-1BFF-A88B-38DD-5AA895ADF2AB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
