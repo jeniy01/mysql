@@ -319,4 +319,65 @@ EXECUTE prd_ins_pro('8162','코엔자임큐텐','35g',48000,'건강기능식품 
 select * from goods1;
 commit;
 
+-- 함수명 : update_mem_fnc
+-- 특정 아이디를 가진 회원의 정보를 입력된 값으로 변경하고, 그 입력된 정보를 출력하도록 하는 함수를 생성하고
+-- CREATE OR REPLACE FUNCTION update_mem_fnc(vid IN VARCHAR2, sw IN VARCHAR2, v2 IN VARCHAR2)..
+select * from user1;
+CREATE OR REPLACE FUNCTION update_mem_fnc(vid IN VARCHAR2, sw IN VARCHAR2, v2 IN VARCHAR2)
+        RETURN NUMBER
+    IS
+    vcnt NUMBER := 0;
+    BEGIN
+        IF sw='pw' THEN
+            UPDATE user1 SET pw = v2 WHERE id=vid;
+        ELSIF sw='name' THEN
+            UPDATE user1 SET name = v2 WHERE id=vid;
+        ELSIF sw='tel' THEN
+            UPDATE user1 SET tel = v2 WHERE id=vid;
+        ELSIF sw='addr' THEN
+            UPDATE user1 SET addr = v2 WHERE id=vid;
+        ELSIF sw='email' THEN
+            UPDATE user1 SET email = v2 WHERE id=vid;
+        ELSE
+            DBMS_OUTPUT.put_line('변경된 값이 없음');
+        END IF;
+        commit;
+        DBMS_OUTPUT.put_line('변경된 정보 : '||sw||' '||vid||' '||v2);
+        RETURN vcnt;    -- 리턴타입이 꼭 있어야 한다.
+    END;
+/
+
+-- 구현할 것.
+-- VAR cnt NUMBER;
+-- EXECUTE :cnt := update_mem_fnc('');
+
+-- 반환 타입 객체 : 본인이 반환되는 데이터를 기준으로 테이블과 유사한 형태의 컬렉션 자료형을 선언할 수 있다.
+-- 타입 객체 생성
+/*
+CREATE OR REPLACE TYPE 타입명 AS OBJECT (
+    컬럼1 기본자료형[, 컬럼2 기본자료형,..]
+);
+*/
+-- 테이블 타입 객체 정의
+select * from user1;
+desc user1;
+CREATE OR REPLACE TYPE USER_TYPE AS OBJECT (    -- 테이블 타입 객체 정의
+    ID VARCHAR2(20), PW VARCHAR2(300), NAME VARCHAR2(20), TEL VARCHAR2(13), ADDR VARCHAR2(300), EMAIL VARCHAR2(50)
+);
+-- 위 구문 실행 후 테이블 타입 객체 생성
+CREATE OR REPLACE TYPE MEM_TBL AS TABLE OF USER_TYPE;   -- 테이블 타입 객체 생성
+-- 위 구문 실행 후 타입 객체로 회원정보를 반환하는 함수 생성
+CREATE OR REPLACE FUNCTION get_mem_info(vid IN VARCHAR2)    -- 타입 객체로 회원정보를 반환하는 함수 생성
+    RETURN MEM_TBL
+    IS tb MEM_TBL;
+    BEGIN
+        SELECT USER_TYPE(id,pw,name,tel,addr,email)
+        BULK COLLECT INTO tb
+        FROM user1 WHERE id=vid;
+        RETURN tb;
+    END get_mem_info;
+/
+-- 위 구문 실행 후 회원 정보를 요청하여 출력하기
+select * from table(get_mem_info('kbs'));
+
 
