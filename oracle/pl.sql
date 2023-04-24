@@ -348,8 +348,11 @@ CREATE OR REPLACE FUNCTION update_mem_fnc(vid IN VARCHAR2, sw IN VARCHAR2, v2 IN
 /
 
 -- 구현할 것.
--- VAR cnt NUMBER;
--- EXECUTE :cnt := update_mem_fnc('');
+/*
+VAR cnt NUMBER;
+EXECUTE :cnt := update_mem_fnc('kbs','pw','4848');
+EXECUTE :cnt := update_mem_fnc('kbs','name','김범수');
+*/
 
 -- 반환 타입 객체 : 본인이 반환되는 데이터를 기준으로 테이블과 유사한 형태의 컬렉션 자료형을 선언할 수 있다.
 -- 타입 객체 생성
@@ -381,3 +384,272 @@ CREATE OR REPLACE FUNCTION get_mem_info(vid IN VARCHAR2)    -- 타입 객체로 
 select * from table(get_mem_info('kbs'));
 
 
+
+
+-- user1(회원)테이블에 기본값을 0으로 하는 컬럼 point를 추가하여라
+alter table user1 add point number default 0;
+
+-- user1(회원)테이블에 기본값을 0으로 하는 컬럼 visited을 추가하여라
+alter table user1 add visited number default 0;
+
+-- 함수 이름 : user_pointup_fnc
+-- user1(회원)테이블의 데이터 중에서 요청한 아이디에 대하여 로그인 횟수(visited)를 1씩 증가시키고 포인트(point)를 5점씩 증가 되는 연쇄동작되도록 함수를 작성하고
+select * from user1;
+desc user1;
+
+CREATE OR REPLACE FUNCTION user_pointup_fnc(vid in user1.id%TYPE)
+        RETURN NUMBER
+    IS
+        up_data number := 5;
+    BEGIN
+        update user1 set visited=visited+1, point=point+up_data where id=vid;
+        commit;
+        RETURN up_data;
+    END user_pointup_fnc;
+/
+
+-- 실행하시오
+variable pt number;
+execute :pt := user_pointup_fnc('kbs');
+
+
+
+
+
+-- 함수명 : basket_ins_fnc
+-- basket(장바구니)에 데이터가 추가되는 함수를 생성하고
+select * from basket1;
+desc basket1;
+
+CREATE OR REPLACE FUNCTION basket_ins_fnc(vid in basket1.id%TYPE, vgcode in basket1.gcode%TYPE, vamount in basket1.amount%TYPE)
+        RETURN NUMBER
+    IS
+    data1 NUMBER := 0;
+    BEGIN
+        select TO_CHAR(bcode) into data1 from basket1 order by bcode desc;
+        data1 := data1 + 1;
+        insert into basket1 values(TO_CHAR(data1, '10000'), vid, vgcode, vamount);
+        commit;
+        DBMS_OUTPUT.PUT_LINE(TO_CHAR(data1, '10000') || '가 추가되었습니다.');
+        RETURN data1;
+    END basket_ins_fnc;
+/
+
+-- 안 됨
+-- 실행하시오
+variable data1 number;
+execute :data1 := basket_ins_fnc('kbs','5072',1);
+variable cnt number;
+execute :cnt := basket_ins_fnc('jtb','8138',1);
+variable cnt number;
+execute :cnt := basket_ins_fnc('sbs','8162',1);
+
+-- 아래와 같이 첫 번째 장바구니건은 sql문의 insert문으로 데이터를 직접 입력한 후 3건 이상 함수를 실행하여 추가하시오
+insert into basket1 values('10001','mbc','6186',1);
+
+
+
+
+-- 함수 이름 : select_addr_fnc
+-- user1테이블에서 addr(주소)가 입력된 값이 포함된 회원의 이름, 전화번호, 주소를 출력하는 함수를 생성하고
+select * from user1;
+desc user1;
+
+CREATE OR REPLACE FUNCTION select_addr_fnc(kdata in user1.addr%TYPE)
+    RETURN VARCHAR2
+    IS
+        vname user1.name%TYPE;
+    BEGIN
+        FOR i in(select * from user1 where addr like '%'||kdata||'%') LOOP
+            DBMS_OUTPUT.put_line(i.name||' '||i.tel||' '||i.addr);
+    END LOOP;
+    RETURN vname;
+END;
+/
+
+-- 실행하시오
+variable vname varchar2(20);
+execute :vname := select_addr_fnc('고양');
+
+
+
+
+-- 함수 이름 : user_rank_fnc
+-- user1테이블에서 visited 컬럼별로 회원등급을 구하여 고객아이디, 고객이름, 등급을 출력하는 함수를 IF문, 반복실행문(WHILE, LOOP, FOR)을 사용하여 작성하고
+select * from user1;
+desc user1;
+
+CREATE OR REPLACE FUNCTION user_rank_fnc
+RETURN number
+IS
+    i number := 0;
+    rank varchar2(20) := '';
+BEGIN
+    DBMS_OUTPUT.ENABLE;
+    DBMS_OUTPUT.PUT_LINE('아이디' || ' ' || '고객명' || ' ' || '등급');
+    FOR r IN (SELECT id, name, visited FROM user1) LOOP
+    i := i+1;
+    IF(r.visited >= 10) THEN rank := '우수회원';
+    ELSIF(r.visited >= 5) THEN rank := '정회원';
+    ELSE rank := '준회원';
+    END IF;
+    DBMS_OUTPUT.PUT_LINE(r.id || ' ' || r.name || ' ' || rank);
+    rank := '';
+END LOOP;
+RETURN i;
+END;
+/
+
+-- 실행하되, 회원등급이 10회 이상 방문시 우수회원, 5회 이상 방문시 정회원, 5회 미만 방문시 준회원으로 하며, 회원등급의 컬럼은 방문횟수인 visited를 활용할 것
+variable rwcnt number;
+execute :rwcnt := user_rank_fnc;
+
+
+
+
+-- 함수 이름 : user_basket_fnc
+-- 회원 아이디(id)를 입력받아 해당 장바구니의 정보를 고객명, 연락처, 상품명, 수량, 결제할금액을 출력하는 함수를 생성하고
+CREATE OR REPLACE FUNCTION user_basket_fnc(vid in user1.id%TYPE)
+RETURN number
+IS
+    i number := 0;
+BEGIN
+    DBMS_OUTPUT.ENABLE;
+    DBMS_OUTPUT.PUT_LINE('고객명'||chr(9)||'연락처'||chr(9)||chr(9)||chr(9)||'상품명'||chr(9)||chr(9)||chr(9)||'수량'||chr(9));
+    FOR r IN (SELECT user1.name as name, user1.tel as tel, goods1.gname as gname, basket1.amount as amount, (goods1.price*basket1.amount) as money FROM basket1, user1, goods1 where basket1.id=user1.id and basket1.gcode=goods1.gcode and user1.id=vid) LOOP
+        i := i+1;
+        DBMS_OUTPUT.PUT_LINE(r.name||chr(9)||r.tel||chr(9)||r.gname||chr(9)||chr(9)||r.amount||chr(9)||r.money);
+    END LOOP;
+    RETURN i;
+END;
+/
+
+-- 실행하시오
+variable rcnt number;
+execute :rcnt := user_basket_fnc('kbs');
+
+
+
+
+create table pro(tno number, pname varchar2(40), dan number); -- 상품테이블
+INSERT INTO pro VALUES(100,'카스맥주',1500);
+INSERT INTO pro VALUES(200,'테라맥주',1000);
+INSERT INTO pro VALUES(300,'필라이트맥주',2000);
+INSERT INTO pro VALUES(400,'하이트맥주',1800);
+INSERT INTO pro VALUES(500,'클라우드맥주',1600);
+create table inventory(ino number, quant number, price number); -- 재고테이블
+create table wearing(ino number, quant number, price number); -- 입고테이블
+create table sales(ino number, quant number, price number); -- 판매테이블
+-- 트리거 이름 : wearing_trigger
+-- 입고(wearing)테이블에 상품을 입고시킬 때 만약 새로운 상품(insert)일 경우와 이미 있는 재고 상품(update)일 경우 분류하여 재고(inventory)테이블에 튜플을 입력하여 자동 재고처리된 결과를 확인하시오 :NEW 새로 추가(갱신)되는 데이터
+CREATE OR REPLACE TRIGGER wearing_trigger
+AFTER INSERT ON wearing
+FOR EACH ROW
+DECLARE
+    v_cnt number;
+BEGIN
+    -- 재고테이블에서 먼저 해당 상품코드에 속하는 레코드 수 계산
+    select count(*) into v_cnt from inventory where ino=:NEW.ino;
+    -- 재고테이블에 없으면 새로운 레코드로 등록(insert)
+    IF(v_cnt=0) THEN insert into inventory values (:NEW.ino, :NEW.quant, :NEW.price);
+    -- 재고테이블에 있으면 해당 상품의 수량과 가격을 갱신(update)
+    ELSE update inventory set quant=quant+:NEW.quant, price=price+:NEW.price where ino=:NEW.ino;
+    END IF;
+END;
+/
+
+select * from wearing;
+select * from inventory;
+insert into wearing values(200, 20, 2000);
+insert into wearing values(200, 5, 2100);
+
+
+-- 트리거 이름 : sales_trigger
+-- 판매가 되면 판매(sales)테이블에 상품이 등록된다. 그렇다면 재고(inventory)테이블에 반영되어 튜플이 변경되도록 트리거를 생성하고
+CREATE OR REPLACE TRIGGER sales_trigger
+AFTER INSERT ON sales
+FOR EACH ROW
+DECLARE
+    v_cnt number;
+BEGIN
+    -- 해당 상품에 대한 판매 후 현재 재고량을 확인
+    select quant-:NEW.quant into v_cnt from inventory where ino=:NEW.ino;
+    -- 남은 재고량이 0보다 작으면, 재고 테이블에서 해당 상품 정보를 삭제
+    IF(v_cnt<=0) THEN delete from inventory where ino=:NEW.ino;
+    -- 남은 재고량이 있으면, 재고 테이블에서 해당 상품의 수량을 감산한다.
+    ELSE update inventory set quant=quant-:NEW.quant, price=price-:NEW.price;
+    END IF;
+END;
+/
+
+-- 실행할 것
+select * from inventory;
+
+-- 임의의 데이터를 판매 테이블에 튜플을 입력하여 자동 재고계산된 그 결과를 확인하시오. 
+insert into sales values(200, 3, 3000);
+select * from inventory;
+
+
+-- 트리거 이름 : return_trigger
+-- 반품이 되면 판매(sales)테이블의 해당 판매 내역이 삭제된다. 그렇다면 재고(inventory)테이블에 반영되어 튜블이 변경되도록 트리거를 생성하고
+CREATE OR REPLACE TRIGGER return_trigger
+AFTER DELETE ON sales
+REFERENCING OLD AS O NEW AS N
+FOR EACH ROW
+DECLARE
+    v_cnt number;
+BEGIN
+    -- 재고테이블에서 먼저 해당 상품코드에 속하는 레코드 수 계산
+    select count(*) into v_cnt from inventory where ino=:O.ino;
+    -- 반품된 상품이 재고테이블에 없으면 새로운 레코드로 등록(insert)
+    IF(v_cnt=0) THEN insert into inventory values (:O.ino, :O.quant, :O.price);
+    -- 반품된 상품이 재고테이블에 있으면 해당 상품의 수량과 가격을 갱신(update)
+    ELSE update inventory set quant=quant+:O.quant, price=price+:O.price where ino=:O.ino;
+    END IF;
+END;
+/
+
+-- 실행할 것
+select * from inventory;
+
+-- 임의의 데이터를 판매테이블에 튜플을 제거되어 자동 재고계산된 결과를 확인하시오
+delete from sales where ino=200;
+select * from inventory;
+
+
+-- 트리거 이름 : rev_trigger
+-- 재고를 반출하게 되면 입고(wearing)테이블의 해당 상품 내역을 제거하면 재고(inventory)테이블에 반영되어 튜플이 변경되도록 트리거를 생성하고
+CREATE OR REPLACE TRIGGER rev_trigger
+AFTER DELETE ON wearing
+REFERENCING OLD AS O NEW AS N
+FOR EACH ROW
+DECLARE
+    v_cnt number;
+BEGIN
+   -- 해당 상품에 대한 반출 후 현재 재고량을 확인
+    select quant-:O.quant into v_cnt from inventory where ino=:O.ino;
+    -- 남은 재고량이 0보다 작으면, 재고 테이블에서 해당 상품 정보를 삭제
+    IF(v_cnt<=0) THEN delete from inventory where ino=:O.ino;
+    -- 반품된 상품이 재고 테이블에 있으면, 해당 상품의 수량과 가격을 갱신(update)
+    ELSE update inventory set quant=quant-:O.quant, price=price-:O.price where ino=:O.ino;
+    END IF;
+END;
+/
+
+-- 실행할 것
+select * from inventory;
+
+-- 임의의 데이터를 입고 테이블의 튜플을 제거하여 자동 재고계산된 결과를 확인하시오
+delete from wearing where ino=200;
+select * from inventory;
+
+-- 모든 함수, 트리거, 프로시저 제거
+-- DROP FUNCTION|TRIGGER|PROCEDURE  함수명|트리거명|프로시저명 
+-- DROP FUNCTION|TRIGGER|PROCEDURE  함수명|트리거명|프로시저명 
+-- ex1) DROP FUNCTION customer_sort -> customer_sort 함수 제거
+-- ex2) DROP PROCEDURE customer_sort -> customer_sort 프로시저 제거
+-- ex3) DROP TRIGGER sales_trigger -> sales_trigger 트리거 제거
+
+
+create table pan(snum number, id varchar2(20), tno number, amount number, kum number); -- 판매 테이블
+create table mem(id varchar2(20), name varchar2(20), point number); -- 회원 테이블
